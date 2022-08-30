@@ -1,0 +1,102 @@
+local vantage = require 'vantage.vantage_core'
+
+go.property("movement_speed", 20)
+go.property("rotation_speed", 0.25)
+
+local function make_camera(id)
+	return {
+		id             = id,
+		forward        = 0,
+		sidestep       = 0,
+		up             = 0,
+		yaw            = 0,
+		pitch          = 0,
+		movement_speed = 0,
+		rotation_speed = 0,
+	}
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.camera = make_camera("#vantage_component")
+end
+
+local function move_forward(camera)
+	camera.forward = camera.forward - camera.movement_speed
+end
+
+local function move_backward(camera)
+	camera.forward = camera.forward + camera.movement_speed
+end
+
+local function move_up(camera)
+	camera.up = camera.up + camera.movement_speed
+end
+
+local function move_down(camera)
+	camera.up = camera.up - camera.movement_speed
+end
+
+local function strafe_left(camera)
+	camera.sidestep = camera.sidestep - camera.movement_speed
+end
+
+local function strafe_right(camera)
+	camera.sidestep = camera.sidestep + camera.movement_speed
+end
+
+local function rotate(camera, yaw, pitch)
+	camera.yaw   = camera.yaw - yaw * camera.rotation_speed
+	camera.pitch = camera.pitch + pitch * camera.rotation_speed
+end
+
+function update(self, dt)
+	self.camera.movement_speed = self.movement_speed
+	self.camera.rotation_speed = self.rotation_speed
+	
+	local main_camera 		   = self.camera.id
+	local main_camera_position = go.get_world_position(main_camera)
+	local forward_vec 		   = vmath.vector3(0,0,1)
+	local side_vec             = vmath.vector3(1, 0, 0)
+
+	local camera_yaw           = vmath.quat_rotation_y(math.rad(self.camera.yaw))
+	local camera_pitch         = vmath.quat_rotation_x(math.rad(self.camera.pitch))
+	local camera_rot           = camera_yaw * camera_pitch
+
+	local forward_scaled       = self.camera.forward * dt
+	local sidestep_scaled      = self.camera.sidestep * dt
+	local up_scaled            = self.camera.up * dt
+
+	forward_vec = vmath.rotate(camera_rot, forward_vec)
+	forward_vec = forward_vec * forward_scaled
+
+	side_vec = vmath.rotate(camera_rot, side_vec)
+	side_vec = side_vec * sidestep_scaled
+	local new_pos = main_camera_position + forward_vec + side_vec
+	new_pos.y = new_pos.y + up_scaled
+
+	go.set_position(new_pos, main_camera)
+	go.set_rotation(camera_rot, main_camera)
+
+	self.camera.forward  = 0
+	self.camera.sidestep = 0
+	self.camera.up       = 0
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash(vantage.VANTAGE_W) then
+		move_forward(self.camera)
+	elseif action_id == hash(vantage.VANTAGE_S) then
+		move_backward(self.camera)
+	elseif action_id == hash(vantage.VANTAGE_A) then
+		strafe_left(self.camera)
+	elseif action_id == hash(vantage.VANTAGE_D) then
+		strafe_right(self.camera)
+	elseif action_id == hash(vantage.VANTAGE_Q) then
+		move_down(self.camera)
+	elseif action_id == hash(vantage.VANTAGE_E) then
+		move_up(self.camera)
+	elseif action_id == hash(vantage.VANTAGE_MOUSE_1) then
+		rotate(self.camera, action.dx, action.dy)
+	end
+end
