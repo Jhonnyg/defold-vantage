@@ -1,14 +1,16 @@
 local M = {}
 
-M.VANTAGE_W       = hash("VANTAGE_W")
-M.VANTAGE_S       = hash("VANTAGE_S")
-M.VANTAGE_A       = hash("VANTAGE_A")
-M.VANTAGE_D       = hash("VANTAGE_D")
-M.VANTAGE_Q       = hash("VANTAGE_Q")
-M.VANTAGE_E       = hash("VANTAGE_E")
-M.VANTAGE_MOUSE_1 = hash("VANTAGE_MOUSE_1")
-M.VANTAGE_MOUSE_2 = hash("VANTAGE_MOUSE_2")
-M.VANTAGE_MOUSE_3 = hash("VANTAGE_MOUSE_3")
+M.VANTAGE_W          = hash("VANTAGE_W")
+M.VANTAGE_S          = hash("VANTAGE_S")
+M.VANTAGE_A          = hash("VANTAGE_A")
+M.VANTAGE_D          = hash("VANTAGE_D")
+M.VANTAGE_Q          = hash("VANTAGE_Q")
+M.VANTAGE_E          = hash("VANTAGE_E")
+M.VANTAGE_MOUSE_1    = hash("VANTAGE_MOUSE_1")
+M.VANTAGE_MOUSE_2    = hash("VANTAGE_MOUSE_2")
+M.VANTAGE_MOUSE_3    = hash("VANTAGE_MOUSE_3")
+M.VANTAGE_WHEEL_UP   = hash("VANTAGE_WHEEL_UP")
+M.VANTAGE_WHEEL_DOWN = hash("VANTAGE_WHEEL_DOWN")
 
 M.VANTAGE_TYPE_WASD    = 0
 M.VANTAGE_TYPE_ORBITAL = 1
@@ -98,11 +100,13 @@ M.orbital = {
 		go.set_position(camera_position, main_camera)
 		go.set_rotation(camera_rot, self.id)
 	end,
-	on_input = function(self, action_id, action)
+	on_input = function(self, action_id, action)		
 		if action_id == hash(M.VANTAGE_MOUSE_1) then
 			rotate(self, action.dx, action.dy)
-		elseif action_id == hash(M.VANTAGE_MOUSE_2) then
-			self.zoom_offset = self.zoom_offset + action.dy * self.movement_speed
+		elseif action_id == hash(M.VANTAGE_WHEEL_UP) then
+			self.zoom_offset = self.zoom_offset - self.movement_speed
+		elseif action_id == hash(M.VANTAGE_WHEEL_DOWN) then
+			self.zoom_offset = self.zoom_offset + self.movement_speed
 		end
 	end
 }
