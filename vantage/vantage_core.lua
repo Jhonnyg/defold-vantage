@@ -87,7 +87,9 @@ M.wasd = {
 		elseif action_id == hash(M.VANTAGE_E) then
 			move_up(self)
 		elseif action_id == hash(M.VANTAGE_MOUSE_1) then
-			rotate(self, action.dx, action.dy)
+			if not action.pressed then
+				rotate(self, action.dx, action.dy)
+			end
 		end
 	end
 }
