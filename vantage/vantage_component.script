@@ -27,6 +27,13 @@ local function make_camera(id, type)
 		camera.on_update = vantage.orbital.on_update
 	end
 
+	local sys_info = sys.get_sys_info()
+	camera.use_touch_controls = sys_info.system_name == "Android" or sys_info.system_name == "iPhone OS"
+
+	local window_width, window_height = window.get_size()
+	local project_width = sys.get_config_int("display.width")
+	camera.window_scale = window_width / project_width
+
 	return camera
 end
 

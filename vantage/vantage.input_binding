@@ -42,3 +42,7 @@ mouse_trigger {
   input: MOUSE_WHEEL_DOWN
   action: "VANTAGE_WHEEL_DOWN"
 }
+touch_trigger {
+  input: TOUCH_MULTI
+  action: "VANTAGE_TOUCH_MULTI"
+}
