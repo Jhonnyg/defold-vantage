@@ -11,11 +11,11 @@ height = 640
 
 [android]
 input_method = HiddenInputField
-package = com.defold.example.basic3d
+package = com.defold.vantage
 
 [project]
 dependencies = 
-title = defold-simple-fpscamera
+title = Defold Simple 3D Camera
 
 [physics]
 type = 3D
@@ -31,4 +31,10 @@ include_dirs = vantage
 
 [input]
 game_binding = /vantage/vantage.input_bindingc
+
+[render]
+clear_color_red = 0.25
+clear_color_green = 0.25
+clear_color_blue = 0.25
+clear_color_alpha = 1.0
 

@@ -8,6 +8,7 @@ go.property("zoom",           5)
 local function make_camera(id, type)
 	local camera = {
 		id             = id,
+		type           = type,
 		forward        = 0,
 		sidestep       = 0,
 		up             = 0,
@@ -37,17 +38,23 @@ local function make_camera(id, type)
 	return camera
 end
 
+local function get_current_type(self)
+	if self.orbital_camera then
+		return vantage.VANTAGE_TYPE_ORBITAL
+	end
+	return vantage.VANTAGE_TYPE_WASD
+end
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
-
-	if self.orbital_camera then
-		self.camera = make_camera("#vantage_component", vantage.VANTAGE_TYPE_ORBITAL)
-	else
-		self.camera = make_camera("#vantage_component", vantage.VANTAGE_TYPE_WASD)
-	end
+	self.camera = make_camera("#vantage_component", get_current_type(self))
 end
 
 function update(self, dt)
+	if get_current_type(self) ~= self.camera.type then
+		self.camera = make_camera("#vantage_component", get_current_type(self))
+	end
+	
 	self.camera.movement_speed = self.movement_speed
 	self.camera.rotation_speed = self.rotation_speed
 	self.camera.zoom           = self.zoom

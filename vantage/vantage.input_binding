@@ -22,6 +22,18 @@ key_trigger {
   input: KEY_E
   action: "VANTAGE_E"
 }
+key_trigger {
+  input: KEY_R
+  action: "EXAMPLE_R"
+}
+key_trigger {
+  input: KEY_1
+  action: "EXAMPLE_1"
+}
+key_trigger {
+  input: KEY_2
+  action: "EXAMPLE_2"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_1
   action: "VANTAGE_MOUSE_1"

@@ -83,6 +83,7 @@ function update(self)
     render.enable_state(render.STATE_DEPTH_TEST)
     render.set_depth_mask(true)
     render.draw(self.model_pred)
+    render.disable_state(render.STATE_DEPTH_TEST)
 
     -- debug rendering
     --
