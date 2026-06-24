@@ -137,17 +137,17 @@ M.orbital = {
 		local camera_pitch         = vmath.quat_rotation_x(math.rad(self.pitch))
 		local camera_rot           = camera_yaw * camera_pitch
 		local camera_position      = vmath.rotate(camera_rot, vmath.vector3(0, 0, self.zoom + self.zoom_offset))
-		go.set_position(camera_position, main_camera)
+		go.set_position(camera_position, self.id)
 		go.set_rotation(camera_rot, self.id)
 	end,
 	on_input = function(self, action_id, action)		
-		if action_id == hash(M.VANTAGE_MOUSE_1) then
+		if action_id == M.VANTAGE_MOUSE_1 then
 			if not action.pressed then
 				rotate(self, action.dx, action.dy)
 			end
-		elseif action_id == hash(M.VANTAGE_WHEEL_UP) then
+		elseif action_id == M.VANTAGE_WHEEL_UP then
 			self.zoom_offset = self.zoom_offset - self.movement_speed
-		elseif action_id == hash(M.VANTAGE_WHEEL_DOWN) then
+		elseif action_id == M.VANTAGE_WHEEL_DOWN then
 			self.zoom_offset = self.zoom_offset + self.movement_speed
 		end
 	end

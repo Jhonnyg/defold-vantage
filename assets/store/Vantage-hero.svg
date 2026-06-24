@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 666" role="img" aria-label="Vantage hero">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="2400" y2="666" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1d3163"/>
+      <stop offset="1" stop-color="#15244a"/>
+    </linearGradient>
+    <linearGradient id="lens" x1="410" y1="380" x2="650" y2="640" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1c68ec"/>
+      <stop offset="1" stop-color="#00e9df"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#081126" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+
+  <rect width="2400" height="666" fill="url(#bg)"/>
+
+  <g transform="translate(154 24) scale(0.6)" filter="url(#shadow)">
+    <rect x="184" y="346" width="656" height="368" rx="72" fill="#f0f2f6"/>
+    <path d="M354 346l64-92h188l64 92z" fill="url(#lens)"/>
+    <rect x="270" y="292" width="138" height="72" rx="26" fill="#f0f2f6"/>
+    <circle cx="338" cy="548" r="38" fill="#15244a"/>
+    <circle cx="572" cy="550" r="178" fill="#15244a"/>
+    <circle cx="572" cy="550" r="142" fill="#f0f2f6"/>
+    <circle cx="570" cy="548" r="104" fill="url(#lens)"/>
+    <circle cx="570" cy="548" r="58" fill="#15244a" opacity="0.48"/>
+    <circle cx="536" cy="506" r="24" fill="#f0f2f6" opacity="0.9"/>
+  </g>
+
+  <text x="820" y="292"
+        fill="#f0f2f6"
+        font-family="Avenir Next, Inter, Helvetica Neue, Arial, sans-serif"
+        font-size="168"
+        font-weight="800"
+        letter-spacing="0">Vantage</text>
+  <text x="826" y="384"
+        fill="#00e9df"
+        font-family="Avenir Next, Inter, Helvetica Neue, Arial, sans-serif"
+        font-size="52"
+        font-weight="700"
+        letter-spacing="0">Simple 3D camera controls for Defold</text>
+  <path d="M828 434h690" fill="none" stroke="#1c68ec" stroke-width="10" stroke-linecap="round" opacity="0.72"/>
+</svg>
