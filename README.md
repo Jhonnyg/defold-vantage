@@ -15,7 +15,7 @@ without building the input handling from scratch.
 - Q/E vertical movement.
 - Optional orbital camera mode.
 - Basic two-zone touch controls on mobile devices.
-- Runtime properties for movement speed, rotation speed, zoom, and camera mode.
+- Runtime properties for mode-specific movement, rotation, zoom, and camera mode.
 - Example project showing how to switch camera modes at runtime.
 
 ## Installation
@@ -66,20 +66,26 @@ The `vantage_component.script` exposes these properties in the editor:
 
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `orbital_camera` | Boolean | `false` | Switches between first-person and orbital camera behavior. |
-| `movement_speed` | Number | `20` | Camera movement speed. In orbital mode this also controls wheel zoom steps. |
-| `rotation_speed` | Number | `0.25` | Mouse and touch rotation sensitivity. |
-| `zoom` | Number | `5` | Base distance used by orbital camera mode. |
+| `use_orbital_camera` | Boolean | `false` | Switches between first-person and orbital camera behavior. |
+| `first_person_movement_speed` | Number | `20` | Movement speed used by first-person mode. |
+| `first_person_rotation_speed` | Number | `0.25` | Mouse and touch rotation sensitivity used by first-person mode. |
+| `orbital_rotation_speed` | Number | `0.25` | Mouse rotation sensitivity used by orbital mode. |
+| `orbital_zoom` | Number | `5` | Base distance from the look-at point in orbital mode. |
+| `orbital_zoom_speed` | Number | `20` | Mouse wheel zoom step used by orbital mode. |
+| `orbital_look_at` | URL | `msg.url()` | Optional game object URL used as the orbital look-at point. Defaults to world origin when unset. |
 
 You can also change these properties at runtime:
 
 ```lua
 local camera = "/camera#vantage_component"
 
-go.set(camera, "movement_speed", 5)
-go.set(camera, "rotation_speed", 0.2)
-go.set(camera, "orbital_camera", true)
-go.set(camera, "zoom", 8)
+go.set(camera, "first_person_movement_speed", 5)
+go.set(camera, "first_person_rotation_speed", 0.2)
+go.set(camera, "use_orbital_camera", true)
+go.set(camera, "orbital_rotation_speed", 0.2)
+go.set(camera, "orbital_zoom", 8)
+go.set(camera, "orbital_zoom_speed", 20)
+go.set(camera, "orbital_look_at", msg.url("/target"))
 ```
 
 ## Example Project

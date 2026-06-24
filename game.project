@@ -15,7 +15,8 @@ package = com.defold.vantage
 
 [project]
 dependencies = 
-title = Defold Simple 3D Camera
+title = Defold Vantage
+developer = Jhonny Göransson
 
 [physics]
 type = 3D

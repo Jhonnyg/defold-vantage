@@ -2,107 +2,15 @@ name: "main"
 scale_along_z: 0
 embedded_instances {
   id: "main"
+  children: "lights"
+  children: "scene"
   data: "components {\n"
-  "  id: \"cube\"\n"
-  "  component: \"/assets/models/cube.model\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "  property_decls {\n"
-  "  }\n"
-  "}\n"
-  "components {\n"
-  "  id: \"main\"\n"
-  "  component: \"/main/main.script\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "  property_decls {\n"
-  "  }\n"
-  "}\n"
-  "components {\n"
-  "  id: \"quad\"\n"
-  "  component: \"/assets/models/quad.model\"\n"
-  "  position {\n"
-  "    x: 3.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "  property_decls {\n"
-  "  }\n"
-  "}\n"
-  "components {\n"
-  "  id: \"sphere\"\n"
-  "  component: \"/assets/models/sphere.model\"\n"
-  "  position {\n"
-  "    x: 1.5\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "  property_decls {\n"
-  "  }\n"
-  "}\n"
-  "components {\n"
   "  id: \"gui\"\n"
   "  component: \"/main/gui.gui\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "  property_decls {\n"
-  "  }\n"
   "}\n"
   ""
   position {
     x: -1.53
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
   }
 }
 embedded_instances {
@@ -110,28 +18,30 @@ embedded_instances {
   data: "components {\n"
   "  id: \"vantage_component\"\n"
   "  component: \"/vantage/vantage_component.script\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
   "  properties {\n"
-  "    id: \"orbital_camera\"\n"
+  "    id: \"use_orbital_camera\"\n"
   "    value: \"false\"\n"
   "    type: PROPERTY_TYPE_BOOLEAN\n"
   "  }\n"
   "  properties {\n"
-  "    id: \"movement_speed\"\n"
-  "    value: \"5.0\"\n"
+  "    id: \"first_person_movement_speed\"\n"
+  "    value: \"500.0\"\n"
   "    type: PROPERTY_TYPE_NUMBER\n"
   "  }\n"
-  "  property_decls {\n"
+  "  properties {\n"
+  "    id: \"orbital_zoom\"\n"
+  "    value: \"200.0\"\n"
+  "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"orbital_zoom_speed\"\n"
+  "    value: \"15.0\"\n"
+  "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"orbital_look_at\"\n"
+  "    value: \"/orbit_anchor\"\n"
+  "    type: PROPERTY_TYPE_URL\n"
   "  }\n"
   "}\n"
   "embedded_components {\n"
@@ -140,38 +50,136 @@ embedded_instances {
   "  data: \"aspect_ratio: 1.0\\n"
   "fov: 0.7854\\n"
   "near_z: 0.1\\n"
-  "far_z: 50.0\\n"
+  "far_z: 1000.0\\n"
   "auto_aspect_ratio: 1\\n"
-  "orthographic_projection: 0\\n"
-  "orthographic_zoom: 1.0\\n"
   "\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
   "}\n"
   ""
   position {
-    x: 0.0
-    y: 0.0
-    z: 10.0
+    x: 522.77747
+    y: 303.7383
+    z: 195.15202
   }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
+}
+embedded_instances {
+  id: "scene"
+  children: "orbit_anchor"
+  data: "components {\n"
+  "  id: \"cube\"\n"
+  "  component: \"/assets/models/cube.model\"\n"
+  "}\n"
+  "components {\n"
+  "  id: \"quad\"\n"
+  "  component: \"/assets/models/quad.model\"\n"
+  "  position {\n"
+  "    x: 3.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"sphere\"\n"
+  "  component: \"/assets/models/sphere.model\"\n"
+  "  position {\n"
+  "    x: 1.5\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"main\"\n"
+  "  component: \"/main/main.script\"\n"
+  "}\n"
+  ""
+  position {
+    x: 402.85843
+    y: 304.9953
+    z: -34.15137
   }
   scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
+    x: 75.755684
+    y: 75.755684
+    z: 75.755684
+  }
+}
+embedded_instances {
+  id: "orbit_anchor"
+  data: ""
+  position {
+    x: 1.5
+  }
+}
+embedded_instances {
+  id: "lights"
+  children: "directional"
+  data: "embedded_components {\n"
+  "  id: \"ambient_light\"\n"
+  "  type: \"ambient_light\"\n"
+  "  data: \"data {\\n"
+  "  struct {\\n"
+  "    fields {\\n"
+  "      key: \\\"color\\\"\\n"
+  "      value {\\n"
+  "        list {\\n"
+  "          values {\\n"
+  "            number: 1.0\\n"
+  "          }\\n"
+  "          values {\\n"
+  "            number: 1.0\\n"
+  "          }\\n"
+  "          values {\\n"
+  "            number: 1.0\\n"
+  "          }\\n"
+  "        }\\n"
+  "      }\\n"
+  "    }\\n"
+  "    fields {\\n"
+  "      key: \\\"intensity\\\"\\n"
+  "      value {\\n"
+  "        number: 0.2\\n"
+  "      }\\n"
+  "    }\\n"
+  "  }\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "directional"
+  data: "embedded_components {\n"
+  "  id: \"directional_light\"\n"
+  "  type: \"directional_light\"\n"
+  "  data: \"data {\\n"
+  "  struct {\\n"
+  "    fields {\\n"
+  "      key: \\\"color\\\"\\n"
+  "      value {\\n"
+  "        list {\\n"
+  "          values {\\n"
+  "            number: 1.0\\n"
+  "          }\\n"
+  "          values {\\n"
+  "            number: 1.0\\n"
+  "          }\\n"
+  "          values {\\n"
+  "            number: 1.0\\n"
+  "          }\\n"
+  "        }\\n"
+  "      }\\n"
+  "    }\\n"
+  "    fields {\\n"
+  "      key: \\\"intensity\\\"\\n"
+  "      value {\\n"
+  "        number: 1.0\\n"
+  "      }\\n"
+  "    }\\n"
+  "  }\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 78.276924
+  }
+  rotation {
+    x: -0.5738386
+    w: 0.8189684
   }
 }

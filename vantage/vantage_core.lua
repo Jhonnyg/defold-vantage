@@ -56,9 +56,16 @@ local function rotate(camera, yaw, pitch)
 	camera.pitch = camera.pitch + pitch * camera.rotation_speed
 end
 
+local function get_orbit_position(camera)
+	if camera.look_at then
+		return go.get_world_position(camera.look_at)
+	end
+	return vmath.vector3()
+end
+
 M.wasd = {
 	on_update = function(self, dt)
-		local main_camera_position = go.get_world_position(self.id)
+		local main_camera_position = self.position or go.get_position(self.id)
 		local forward_vec 		   = vmath.vector3(0,0,1)
 		local side_vec             = vmath.vector3(1, 0, 0)
 
@@ -78,6 +85,8 @@ M.wasd = {
 		local new_pos = main_camera_position + forward_vec + side_vec
 		new_pos.y = new_pos.y + up_scaled
 
+		self.position = new_pos
+		self.rotation = camera_rot
 		go.set_position(new_pos, self.id)
 		go.set_rotation(camera_rot, self.id)
 
@@ -136,7 +145,10 @@ M.orbital = {
 		local camera_yaw           = vmath.quat_rotation_y(math.rad(self.yaw))
 		local camera_pitch         = vmath.quat_rotation_x(math.rad(self.pitch))
 		local camera_rot           = camera_yaw * camera_pitch
-		local camera_position      = vmath.rotate(camera_rot, vmath.vector3(0, 0, self.zoom + self.zoom_offset))
+		local camera_offset        = vmath.rotate(camera_rot, vmath.vector3(0, 0, self.zoom + self.zoom_offset))
+		local camera_position      = get_orbit_position(self) + camera_offset
+		self.position              = camera_position
+		self.rotation              = camera_rot
 		go.set_position(camera_position, self.id)
 		go.set_rotation(camera_rot, self.id)
 	end,
@@ -146,9 +158,9 @@ M.orbital = {
 				rotate(self, action.dx, action.dy)
 			end
 		elseif action_id == M.VANTAGE_WHEEL_UP then
-			self.zoom_offset = self.zoom_offset - self.movement_speed
+			self.zoom_offset = self.zoom_offset - self.zoom_speed
 		elseif action_id == M.VANTAGE_WHEEL_DOWN then
-			self.zoom_offset = self.zoom_offset + self.movement_speed
+			self.zoom_offset = self.zoom_offset + self.zoom_speed
 		end
 	end
 }
